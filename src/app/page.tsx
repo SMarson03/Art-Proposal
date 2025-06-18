@@ -5,9 +5,9 @@ import { motion } from "framer-motion";
 import "./globals.css"; // Ensure global styles are loaded
 
 const artworks = [
-  { src: "/images/Golden-Table.jpg", title: "The Golden Table" },
-  { src: "/images/Nanny.jpg", title: "Nanny" },
-  { src: "/images/Anansi-and-Brer-Tiger.jpg", title: "Anansi and Brer Tiger" },
+  { src: "/Images/Golden-Table.jpg", title: "The Golden Table" },
+  { src: "/Images/Nanny.jpg", title: "Nanny" },
+  { src: "/Images/Anansi-and-Brer-Tiger.jpg", title: "Anansi and Brer Tiger" },
 ];
 
 const carouselImages = [
