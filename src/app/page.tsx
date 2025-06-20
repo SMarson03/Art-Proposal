@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const artworks = [
   {
@@ -21,15 +21,15 @@ const artworks = [
     src: "/Images/Mumma.jpg",
     title: "Mumma",
   },
-  
 ];
 
 export default function Home() {
-  const autoScrollRef = useRef<HTMLDivElement | null>(null);
+  const autoScrollRef = useRef<HTMLDivElement>(null);
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (autoScrollRef.current) {
+      if (!isHovered && autoScrollRef.current) {
         autoScrollRef.current.scrollBy({
           left: 300,
           behavior: "smooth",
@@ -38,7 +38,7 @@ export default function Home() {
     }, 4000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [isHovered]);
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-yellow-100 via-yellow-50 to-yellow-200 p-6">
@@ -68,7 +68,10 @@ export default function Home() {
 
           <div
             ref={autoScrollRef}
-            className="flex overflow-x-auto space-x-4 scrollbar-hide px-1"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            className="flex overflow-x-auto space-x-4 px-1 scroll-smooth scrollbar-hide"
+            style={{ scrollBehavior: "smooth" }}
           >
             {artworks.map((art, i) => (
               <motion.div
@@ -76,10 +79,12 @@ export default function Home() {
                 whileHover={{ scale: 1.03 }}
                 className="flex-shrink-0 w-72 bg-gradient-to-b from-yellow-100 to-yellow-200 border rounded-2xl shadow-lg p-4 transition duration-300"
               >
-                <img
+                <Image
                   src={art.src}
                   alt={art.title}
-                  className="w-full h-48 object-cover rounded-xl border border-gray-200"
+                  width={288}
+                  height={192}
+                  className="rounded-xl border border-gray-200 object-cover"
                 />
                 <p
                   className="text-md font-medium mt-3 text-black text-center"
