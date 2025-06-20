@@ -1,13 +1,14 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import "./globals.css"; // Ensure global styles are loaded
+import "./globals.css";
 
 const artworks = [
   { src: "/Images/Golden-Table.jpg", title: "The Golden Table" },
   { src: "/Images/Nanny.jpg", title: "Nanny" },
   { src: "/Images/Anansi-and-Brer-Tiger.jpg", title: "Anansi and Brer Tiger" },
+  { src: "/Images/Mumma.jpg", title: "Mumma" },
 ];
 
 const carouselImages = [
@@ -18,9 +19,23 @@ const carouselImages = [
 ];
 
 export default function App() {
+  const autoScrollRef = useRef(null);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (autoScrollRef.current) {
+        autoScrollRef.current.scrollBy({
+          left: 300,
+          behavior: "smooth",
+        });
+      }
+    }, 3000); // scroll every 3 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <>
-      {/* Load Barriecito font */}
       <link
         href="https://fonts.googleapis.com/css2?family=Barriecito&display=swap"
         rel="stylesheet"
@@ -46,66 +61,76 @@ export default function App() {
               The Golden Table, and Rolling Calf through captivating mixed-media
               pieces. Preserving oral storytelling traditions using fabrics, yarn,
               plaster, and paper bringing these ancestral narratives into the
-              contemporary art space
+              contemporary art space.
             </p>
           </motion.div>
 
-          {/* Grid Section */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-12">
-            <motion.div
-              whileHover={{ scale: 1.03 }}
-              className="bg-gradient-to-b from-yellow-100 to-yellow-200 p-6 border rounded-2xl shadow-md flex flex-col justify-between transition duration-300"
+          {/* Grid (now horizontal carousel with autoplay) */}
+          <div className="mt-12">
+            <h2
+              className="text-2xl font-semibold mb-4 text-center text-black"
+              style={{ fontFamily: "'Barriecito', cursive, system-ui" }}
             >
-              <div>
-                <h2
-                  className="text-xl font-semibold mb-2 text-black"
-                  style={{ fontFamily: "'Barriecito', cursive, system-ui" }}
+              Featured Works
+            </h2>
+            <div
+              ref={autoScrollRef}
+              className="flex overflow-x-auto space-x-4 pb-4 scroll-smooth"
+            >
+              {artworks.map((art, i) => (
+                <motion.div
+                  key={i}
+                  whileHover={{ scale: 1.03 }}
+                  className="min-w-[250px] bg-gradient-to-b from-yellow-100 to-yellow-200 border rounded-2xl shadow-lg p-4 flex-shrink-0"
                 >
-                  ARTIST STATEMENT
-                </h2>
-                <p className="text-sm text-black mb-4">
-                  My work is driven by a need to preserve lost cultural
-                  conversations, folk wisdom, and spiritual undertones that too
-                  often go unrecorded. As a Jamaican-born artist living in New York
-                  for most of my life, I’ve lost my accent, but never my roots.
-                  That duality of being shaped by two places fuels much of my
-                  practice. Art has become my way of carrying cultural memory
-                  forward, even when the language of it begins to fade.
-                </p>
-              </div>
-              <div className="mt-4">
-                <p className="text-sm mb-2 text-black">
-                  Interested in Hosting This Show?
-                </p>
-                <a
-                  href="mailto:socsart@gmail.com?subject=Exhibit Inquiry&body=Hi%20there,%0AI'd%20love%20to%20learn%20more%20about%20your%20work!"
-                  className="bg-black text-white px-4 py-2 text-sm rounded hover:bg-green-900 transition duration-200 inline-block"
-                >
-                  Email
-                </a>
-              </div>
-            </motion.div>
-
-            {artworks.map((art, i) => (
-              <motion.div
-                key={i}
-                whileHover={{ scale: 1.03 }}
-                className="bg-gradient-to-b from-yellow-100 to-yellow-200 border rounded-2xl shadow-lg p-4 flex flex-col items-center justify-center transition duration-300"
-              >
-                <img
-                  src={art.src}
-                  alt={art.title}
-                  className="w-full object-cover rounded-xl border border-gray-200"
-                />
-                <p
-                  className="text-md font-medium mt-3 text-black text-center"
-                  style={{ fontFamily: "'Barriecito', cursive, system-ui" }}
-                >
-                  {art.title}
-                </p>
-              </motion.div>
-            ))}
+                  <img
+                    src={art.src}
+                    alt={art.title}
+                    className="w-full h-48 object-cover rounded-xl border border-gray-200"
+                  />
+                  <p
+                    className="text-md font-medium mt-3 text-black text-center"
+                    style={{ fontFamily: "'Barriecito', cursive, system-ui" }}
+                  >
+                    {art.title}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
           </div>
+
+          {/* Artist Statement Section */}
+          <motion.div
+            whileHover={{ scale: 1.03 }}
+            className="bg-gradient-to-b from-yellow-100 to-yellow-200 p-6 border rounded-2xl shadow-md mt-12 transition duration-300"
+          >
+            <div>
+              <h2
+                className="text-xl font-semibold mb-2 text-black"
+                style={{ fontFamily: "'Barriecito', cursive, system-ui" }}
+              >
+                ARTIST STATEMENT
+              </h2>
+              <p className="text-sm text-black mb-4">
+                My work is driven by a need to preserve lost cultural conversations,
+                folk wisdom, and spiritual undertones that too often go unrecorded.
+                As a Jamaican-born artist living in New York for most of my life,
+                I’ve lost my accent, but never my roots. That duality of being shaped
+                by two places fuels much of my practice. Art has become my way of
+                carrying cultural memory forward, even when the language of it begins
+                to fade.
+              </p>
+              <p className="text-sm mb-2 text-black">
+                Interested in Hosting This Show?
+              </p>
+              <a
+                href="mailto:socsart@gmail.com?subject=Exhibit Inquiry"
+                className="bg-black text-white px-4 py-2 text-sm rounded hover:bg-green-900 transition duration-200 inline-block"
+              >
+                Email
+              </a>
+            </div>
+          </motion.div>
 
           {/* Resume Section */}
           <div className="bg-gradient-to-b from-yellow-100 to-yellow-200 border mt-16 p-8 rounded-2xl shadow-md">
@@ -125,7 +150,7 @@ export default function App() {
               <div>
                 <h3 className="text-lg font-semibold">Professional Summary</h3>
                 <p>
-                  Multidisciplinary artist with over a decade of experience creating and exhibiting work across NYC and beyond. Self-taught, with a practice spanning sculpture, painting, film, fabrication, and curatorial projects. Known for raw, evocative works that blend urban aesthetics with deeply personal themes. Exhibited in independent galleries, public spaces, and art festivals, with features in film and television.
+                  Multidisciplinary artist with over a decade of experience creating and exhibiting work across NYC and beyond. Self-taught, with a practice spanning sculpture, painting, film, fabrication, and curatorial projects. Known for raw, evocative works that blend urban aesthetics with deeply personal themes.
                 </p>
               </div>
 
@@ -139,10 +164,7 @@ export default function App() {
                 <ul className="list-disc list-inside">
                   <li>2021 – What It Feels Like, Brooklyn Space, NY</li>
                   <li>2021 – The Future Is Female, Spaces Dumbo, Brooklyn</li>
-                  <li>2020 – Public Art Mural (featured in indie film <em>As Of Yet</em>), Brooklyn</li>
-                  <li>2015 – KA.LEI.DO.SCOPE, Lyons Wier Gallery, NY</li>
-                  <li>2014 – Haring Lives: An Artist Homage to Keith Haring</li>
-                  <li>2013 – The Art of Boxing, DUMBO Art Festival @ Gleason’s Gym</li>
+                  <li>2020 – Public Art Mural (indie film <em>As Of Yet</em>)</li>
                 </ul>
               </div>
 
@@ -150,22 +172,25 @@ export default function App() {
                 <h3 className="text-lg font-semibold">Commissions & Collaborations</h3>
                 <ul className="list-disc list-inside">
                   <li>2022 – 40 Acres FilmWorks limited edition memorabilia</li>
-                  <li>2020 – Public mural adjacent to ODB mural</li>
-                  <li>2012 – Rime x Reebok installation</li>
                 </ul>
               </div>
 
               <div>
                 <h3 className="text-lg font-semibold">Media Features</h3>
                 <p>
-                  Featured in: Caribbean Life, Why Blue Matters, The Manifold, Creative 5pace Blog, The Wave Newspaper, Dirty Chic Blog, No Pretend Blog. Appearances in: <em>As Of Yet</em> (2020), <em>Jon Glaser Loves Gear</em> (TruTV), <em>Someday This Pain Will Be Useful to You</em> (2011).
+                  Caribbean Life, Creative 5pace Blog, No Pretend Blog, <em>As Of Yet</em> (2020), <em>Jon Glaser Loves Gear</em> (TruTV)
                 </p>
               </div>
             </div>
 
             {/* Carousel Section */}
             <div className="mt-10">
-              <h3 className="text-lg font-semibold mb-4 text-center" style={{ fontFamily: "'Barriecito', cursive, system-ui" }}>Previous Works</h3>
+              <h3
+                className="text-lg font-semibold mb-4 text-center"
+                style={{ fontFamily: "'Barriecito', cursive, system-ui" }}
+              >
+                Previous Works
+              </h3>
               <div className="overflow-x-auto whitespace-nowrap space-x-4 flex">
                 {carouselImages.map((img, i) => (
                   <img
@@ -183,4 +208,3 @@ export default function App() {
     </>
   );
 }
-
