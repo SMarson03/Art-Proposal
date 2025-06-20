@@ -19,7 +19,8 @@ const carouselImages = [
 ];
 
 export default function App() {
-  const autoScrollRef = useRef(null);
+  const autoScrollRef = useRef<HTMLDivElement | null>(null); // ✅
+
 
   useEffect(() => {
     const interval = setInterval(() => {
