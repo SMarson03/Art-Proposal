@@ -13,10 +13,17 @@ const artworks = [
 ];
 
 const carouselImages = [
-  "/images/work1.jpg",
-  "/images/work2.jpg",
-  "/images/work3.jpg",
-  "/images/work4.jpg",
+  "/Images/Me.jpg",
+  "/Images/The-Star.jpg",
+  "/Images/The-Sun.jpg",
+  "Images/Dreams-Fall-Flat.jpg",
+  "/Images/Beef-Patty.jpg",
+  "/Images/Eve-Fed-Adam-and_It-Was-So.jpg",
+  "/Images/Ackee.jpg",
+  "/Images/Signing-Memorobilia.jpg",
+  "/Images/Every-Things-Gucci.jpg",
+  "/Images/Still-Life.jpg",
+
 ];
 
 export default function App() {
@@ -172,9 +179,12 @@ export default function App() {
               <div>
                 <h3 className="text-lg font-semibold">Exhibitions (Highlights)</h3>
                 <ul className="list-disc list-inside">
-                  <li>2021 – What It Feels Like, Brooklyn Space, NY</li>
+                  <li>2021 – What It Feels Like, Brooklyn Space, Brooklyn</li>
                   <li>2021 – The Future Is Female, Spaces Dumbo, Brooklyn</li>
-                  <li>2020 – Public Art Mural (indie film <em>As Of Yet</em>)</li>
+                  <li>2018 – Provisions (Solo Show), Caribbeing House, Brooklyn</li>
+                  <li>2015 – KA.LEI.DO.SCOPE, Lyons Wier Gallery, NY</li>
+                  <li>2014 – Haring Lives: An Artist Homage to Keith Haring, Le Salon d’Art, NY</li>
+                  <li>2013 – The Art of Boxing, DUMBO Art Festival @ Gleason’s Gym, NY</li>
                 </ul>
               </div>
 
@@ -182,6 +192,7 @@ export default function App() {
                 <h3 className="text-lg font-semibold">Commissions & Collaborations</h3>
                 <ul className="list-disc list-inside">
                   <li>2022 – 40 Acres FilmWorks limited edition memorabilia</li>
+                  <li>2020 – Public Art Mural (Featured in Tribeca Film Festival World Premiere<em>As Of Yet</em>) Brooklyn</li>
                 </ul>
               </div>
 
