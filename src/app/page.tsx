@@ -18,7 +18,7 @@ const carouselImages = [
   "/Images/The-Sun.jpg",
   "Images/Dreams-Fall-Flat.jpg",
   "/Images/Beef-Patty.jpg",
-  "/Images/Eve-Fed-Adam-and_It-Was-So.jpg",
+  "/Images/Eve-Fed-Adam-and-It-Was-So.jpg",
   "/Images/Ackee.jpg",
   "/Images/Signing-Memorobilia.jpg",
   "/Images/Every-Things-Gucci.jpg",
@@ -27,26 +27,41 @@ const carouselImages = [
 ];
 
 export default function App() {
-  const autoScrollRef = useRef<HTMLDivElement>(null);
+  const autoScrollRef = useRef<HTMLDivElement | null>(null);
+  const prevWorksRef = useRef<HTMLDivElement | null>(null);
+
   const [isHovered, setIsHovered] = useState(false);
+  const [isPrevHovered, setIsPrevHovered] = useState(false);
 
   useEffect(() => {
-    const scrollContainer = autoScrollRef.current;
-    if (!scrollContainer || isHovered) return;
+    if (isHovered) return;
 
     const interval = setInterval(() => {
-      const maxScrollLeft =
-        scrollContainer.scrollWidth - scrollContainer.clientWidth;
-
-      if (scrollContainer.scrollLeft >= maxScrollLeft - 10) {
-        scrollContainer.scrollTo({ left: 0, behavior: "smooth" });
-      } else {
-        scrollContainer.scrollBy({ left: 300, behavior: "smooth" });
+      if (autoScrollRef.current) {
+        autoScrollRef.current.scrollBy({
+          left: 300,
+          behavior: "smooth",
+        });
       }
     }, 3000);
 
     return () => clearInterval(interval);
   }, [isHovered]);
+
+  useEffect(() => {
+    if (isPrevHovered) return;
+
+    const interval = setInterval(() => {
+      if (prevWorksRef.current) {
+        prevWorksRef.current.scrollBy({
+          left: 300,
+          behavior: "smooth",
+        });
+      }
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [isPrevHovered]);
 
   return (
     <>
@@ -71,11 +86,18 @@ export default function App() {
               FOLKS and TALES
             </h1>
             <p className="text-lg mt-4 max-w-xl mx-auto font-light text-black">
-              This exhibition reimagines Caribbean folklore figures like Anansi,
-              The Golden Table, and Rolling Calf through captivating mixed-media
-              pieces. Preserving oral storytelling traditions using fabrics, yarn,
-              plaster, and paper bringing these ancestral narratives into the
-              contemporary art space.
+              This exhibition reimagines Caribbean folklore working with materials 
+              like wood, yarn, plaster, and paper, each piece embodies the tactile, 
+              layered nature of oral storytelling. These stories of Anansi, 
+              the shape-shifting river mermaids, and the feared Ol’ Higue are not 
+              just tales but survival strategies, belief systems, and mirrors. They 
+              traveled across oceans, whispered from mouth to mouth, reshaping with 
+              each retelling, but never losing their roots. This exhibition is a visual 
+              preservation of those voices. The work is bold, colorful, and immersive 
+              meant to be felt as much as seen. It invites viewers to step into a narrative 
+              world where folklore becomes a living archive, especially important at a time 
+              when oral traditions risk being flattened or forgotten.
+
             </p>
           </motion.div>
 
@@ -118,13 +140,13 @@ export default function App() {
                 className="text-2xl font-semibold mb-4 text-center text-black"
                 style={{ fontFamily: "'Barriecito', cursive, system-ui" }}
               >
-                Featured Works
+                Folks and Tales - Featured Works
               </h2>
               <div
                 ref={autoScrollRef}
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
-                className="flex overflow-x-auto space-x-4 pb-4 scroll-smooth no-scrollbar"
+                className="flex overflow-x-auto space-x-4 pb-4 scroll-smooth black-scrollbar"
               >
                 {artworks.map((art, i) => (
                   <motion.div
@@ -135,7 +157,7 @@ export default function App() {
                     <img
                       src={art.src}
                       alt={art.title}
-                      className="w-[250px] h-[190px] object-cover rounded-xl border border-gray-200"
+                      className="w-full h-48 object-cover rounded-xl border border-gray-200"
                     />
                     <p
                       className="text-md font-medium mt-3 text-black text-center"
@@ -179,12 +201,12 @@ export default function App() {
               <div>
                 <h3 className="text-lg font-semibold">Exhibitions (Highlights)</h3>
                 <ul className="list-disc list-inside">
-                  <li>2021 – What It Feels Like, Brooklyn Space, Brooklyn</li>
+                  <li>2021 – What It Feels Like, Brooklyn Space, NY</li>
                   <li>2021 – The Future Is Female, Spaces Dumbo, Brooklyn</li>
-                  <li>2018 – Provisions (Solo Show), Caribbeing House, Brooklyn</li>
+                  <li>2018 – Provisions, Caribbeing House, Brooklyn</li>
                   <li>2015 – KA.LEI.DO.SCOPE, Lyons Wier Gallery, NY</li>
                   <li>2014 – Haring Lives: An Artist Homage to Keith Haring, Le Salon d’Art, NY</li>
-                  <li>2013 – The Art of Boxing, DUMBO Art Festival @ Gleason’s Gym, NY</li>
+                  <li>2013 – The Art of Boxing, DUMBO Art Festival @ Gleason’s Gym, Brooklyn</li>
                 </ul>
               </div>
 
@@ -192,7 +214,7 @@ export default function App() {
                 <h3 className="text-lg font-semibold">Commissions & Collaborations</h3>
                 <ul className="list-disc list-inside">
                   <li>2022 – 40 Acres FilmWorks limited edition memorabilia</li>
-                  <li>2020 – Public Art Mural (Featured in Tribeca Film Festival World Premiere<em>As Of Yet</em>) Brooklyn</li>
+                  <li>2020 – Public Art Mural (featured in Tribeca Film Fest winner <em>As Of Yet</em>), Brooklyn</li>
                 </ul>
               </div>
 
@@ -210,15 +232,20 @@ export default function App() {
                 className="text-lg font-semibold mb-4 text-center"
                 style={{ fontFamily: "'Barriecito', cursive, system-ui" }}
               >
-                Previous Works
+                Portfolio Highlights
               </h3>
-              <div className="overflow-x-auto whitespace-nowrap space-x-4 flex">
+              <div
+                ref={prevWorksRef}
+                onMouseEnter={() => setIsPrevHovered(true)}
+                onMouseLeave={() => setIsPrevHovered(false)}
+                className="overflow-x-auto black-scrollbar flex space-x-4 pb-4 scroll-smooth"
+              >
                 {carouselImages.map((img, i) => (
                   <img
                     key={i}
                     src={img}
                     alt={`Previous work ${i + 1}`}
-                    className="h-48 w-auto rounded-lg border border-gray-300 inline-block"
+                    className="h-[190px] w-[250px] object-cover rounded-lg border border-gray-300 flex-shrink-0"
                   />
                 ))}
               </div>
@@ -226,16 +253,20 @@ export default function App() {
           </div>
         </div>
 
-        {/* Enhanced Slim Scrollbar Styling */}
+        {/* Scrollbar styles */}
         <style jsx>{`
-          .no-scrollbar::-webkit-scrollbar {
+          .black-scrollbar::-webkit-scrollbar {
             height: 6px;
           }
-          .no-scrollbar::-webkit-scrollbar-thumb {
-            background: #bbb;
-            border-radius: 3px;
+          .black-scrollbar::-webkit-scrollbar-thumb {
+            background: black;
+            border-radius: 10px;
           }
-          .no-scrollbar {
+          .black-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+          }
+          .black-scrollbar {
+            scrollbar-color: black transparent;
             scrollbar-width: thin;
           }
         `}</style>
