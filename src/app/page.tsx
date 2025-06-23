@@ -9,7 +9,7 @@ const artworks = [
   { src: "/Images/Nanny.jpg", title: "Nanny" },
   { src: "/Images/Anansi-and-Brer-Tiger.jpg", title: "Anansi and Brer Tiger" },
   { src: "/Images/River-Mumma.jpg", title: "River Mumma" },
-   { src: "/Images/Rolling-Calf.jpg", title: "Rolling Calf" },
+  { src: "/Images/Rolling-Calf.jpg", title: "Rolling Calf" },
 ];
 
 const carouselImages = [
@@ -20,19 +20,21 @@ const carouselImages = [
 ];
 
 export default function App() {
-  const autoScrollRef = useRef<HTMLDivElement | null>(null);
-gi
+  const autoScrollRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
-    if (isHovered) return; // pause scrolling when hovered
+    const scrollContainer = autoScrollRef.current;
+    if (!scrollContainer || isHovered) return;
 
     const interval = setInterval(() => {
-      if (autoScrollRef.current) {
-        autoScrollRef.current.scrollBy({
-          left: 300,
-          behavior: "smooth",
-        });
+      const maxScrollLeft =
+        scrollContainer.scrollWidth - scrollContainer.clientWidth;
+
+      if (scrollContainer.scrollLeft >= maxScrollLeft - 10) {
+        scrollContainer.scrollTo({ left: 0, behavior: "smooth" });
+      } else {
+        scrollContainer.scrollBy({ left: 300, behavior: "smooth" });
       }
     }, 3000);
 
@@ -116,7 +118,6 @@ gi
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
                 className="flex overflow-x-auto space-x-4 pb-4 scroll-smooth no-scrollbar"
-                style={{ scrollbarWidth: "none" }}
               >
                 {artworks.map((art, i) => (
                   <motion.div
@@ -214,14 +215,17 @@ gi
           </div>
         </div>
 
-        {/* Hide scrollbar style */}
+        {/* Enhanced Slim Scrollbar Styling */}
         <style jsx>{`
           .no-scrollbar::-webkit-scrollbar {
-            display: none;
+            height: 6px;
+          }
+          .no-scrollbar::-webkit-scrollbar-thumb {
+            background: #bbb;
+            border-radius: 3px;
           }
           .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+            scrollbar-width: thin;
           }
         `}</style>
       </div>
