@@ -20,7 +20,8 @@ const carouselImages = [
 ];
 
 export default function App() {
-  const autoScrollRef = useRef(null);
+  const autoScrollRef = useRef<HTMLDivElement | null>(null);
+gi
   const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
