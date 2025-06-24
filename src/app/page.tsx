@@ -20,7 +20,7 @@ const carouselImages = [
   "/Images/Beef-Patty.jpg",
   "/Images/Eve-Fed-Adam-and-It-Was-So.jpg",
   "/Images/Ackee.jpg",
-  "/Images/Signing-Memorobilia.jpg",
+  "/Images/Memorobilia.jpg",
   "/Images/Every-Things-Gucci.jpg",
   "/Images/Still-Life.jpg",
 
@@ -121,7 +121,8 @@ export default function App() {
                 I’ve lost my accent, but never my roots. That duality of being shaped
                 by two places fuels much of my practice. Art has become my way of
                 carrying cultural memory forward, even when the language of it begins
-                to fade.
+                to fade. The collection is still evolving with new pieces as I continue
+                to explore these themes.  
               </p>
               <p className="text-sm mb-2 text-black">
                 Interested in Hosting This Show?
@@ -157,7 +158,7 @@ export default function App() {
                     <img
                       src={art.src}
                       alt={art.title}
-                      className="h-[190px] w-[250px]object-cover rounded-xl border border-gray-200"
+                      className="h-[190px] w-[250px]object-cover rounded-xl border border-gray-200 jutify-center mx-auto"
                     />
                     <p
                       className="text-md font-medium mt-3 text-black text-center"
