@@ -70,14 +70,14 @@ export default function App() {
         rel="stylesheet"
       />
 
-      <div className="min-h-screen bg-green-100 text-[#111827] flex justify-center items-start py-10 px-4">
+      <div className="min-h-screen bg-white text-[#111827] flex justify-center items-start py-10 px-4">
         <div className="w-full max-w-6xl">
           {/* Hero Section */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="bg-gradient-to-b from-yellow-100 to-yellow-200 py-20 px-6 border text-center shadow-md rounded-2xl"
+            className="bg- py-20 px-6 border text-center shadow-md rounded-2xl"
           >
             <h1
               className="barriecito-regular text-6xl font-bold tracking-tight text-black"
@@ -85,7 +85,7 @@ export default function App() {
             >
               FOLKS and TALES
             </h1>
-            <p className="text-lg mt-4 max-w-xl mx-auto font-light text-black">
+            <p className="text-base mt-4 font-light text-black mb-5 leading-relaxed text-center">
               This exhibition reimagines Caribbean folklore working with materials 
               like wood, yarn, plaster, and paper, each piece embodies the tactile, 
               layered nature of oral storytelling. These stories of Anansi, 
@@ -101,79 +101,82 @@ export default function App() {
             </p>
           </motion.div>
 
-          {/* Artist Statement (left) + Featured Works Carousel (right) */}
-          <div className="mt-12 flex flex-col lg:flex-row gap-8">
-            {/* Artist Statement */}
-            <motion.div
-              whileHover={{ scale: 1.03 }}
-              className="bg-gradient-to-b from-yellow-100 to-yellow-200 p-6 border rounded-2xl shadow-md lg:w-1/2 transition duration-300"
-            >
-              <h2
-                className="text-xl font-semibold mb-2 text-black"
-                style={{ fontFamily: "'Barriecito', cursive, system-ui" }}
-              >
-                ARTIST STATEMENT
-              </h2>
-              <p className="text-sm text-black mb-4">
-                My work is driven by a need to preserve lost cultural conversations,
-                folk wisdom, and spiritual undertones that too often go unrecorded.
-                As a Jamaican-born artist living in New York for most of my life,
-                I’ve lost my accent, but never my roots. That duality of being shaped
-                by two places fuels much of my practice. Art has become my way of
-                carrying cultural memory forward, even when the language of it begins
-                to fade. The collection is still evolving with new pieces as I continue
-                to explore these themes.  
-              </p>
-              <p className="text-sm mb-2 text-black">
-                Interested in Hosting This Show?
-              </p>
-              <a
-                href="mailto:socsart@gmail.com?subject=Exhibit Inquiry"
-                className="bg-black text-white px-4 py-2 text-sm rounded hover:bg-green-900 transition duration-200 inline-block"
-              >
-                Email
-              </a>
-            </motion.div>
+          {/* Artist Statement + Featured Works Carousel */}
+          <div className="mt-12 flex flex-col gap-8">
+           {/* Artist Statement (FULL WIDTH under Hero) */}
+<motion.div
+  whileHover={{ scale: 1.01 }}
+  className="mt-8 bg-white p-8 border rounded-2xl shadow-md w-full transition duration-300"
+>
+  <h2
+    className="text-2xl font-semibold mb-3 text-black text-center"
+    style={{ fontFamily: "'Barriecito', cursive, system-ui" }}
+  >
+    ARTIST STATEMENT
+  </h2>
 
-            {/* Featured Works Carousel */}
-            <div className="lg:w-1/2">
-              <h2
-                className="text-2xl font-semibold mb-4 text-center text-black"
-                style={{ fontFamily: "'Barriecito', cursive, system-ui" }}
-              >
-                Folks and Tales - Featured Works
-              </h2>
-              <div
-                ref={autoScrollRef}
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
-                className="flex overflow-x-auto space-x-4 pb-4 scroll-smooth black-scrollbar"
-              >
-                {artworks.map((art, i) => (
-                  <motion.div
-                    key={i}
-                    whileHover={{ scale: 1.03 }}
-                    className="min-w-[250px] bg-gradient-to-b from-yellow-100 to-yellow-200 border rounded-2xl shadow-lg p-4 flex-shrink-0"
-                  >
-                    <img
-                      src={art.src}
-                      alt={art.title}
-                      className="h-[190px] w-[250px]object-cover rounded-xl border border-gray-200 jutify-center mx-auto"
-                    />
-                    <p
-                      className="text-md font-medium mt-3 text-black text-center"
-                      style={{ fontFamily: "'Barriecito', cursive, system-ui" }}
-                    >
-                      {art.title}
-                    </p>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
+  <p className="text-base text-black mb-5 leading-relaxed text-center">
+    My work is driven by a need to preserve lost cultural conversations,
+    folk wisdom, and spiritual undertones that too often go unrecorded.
+    As a Jamaican-born artist living in New York for most of my life,
+    I’ve lost my accent, but never my roots. That duality of being shaped
+    by two places fuels much of my practice. Art has become my way of
+    carrying cultural memory forward, even when the language of it begins
+    to fade. The collection is still evolving with new pieces as I continue
+    to explore these themes.
+  </p>
+
+  <div className="flex flex-col sm:flex-row sm:items-center gap-3 justify-center">
+    <p className="text-base text-black m-0">Interested in Hosting This Show?</p>
+    <a
+      href="mailto:socsart@gmail.com?subject=Exhibit Inquiry"
+      className="bg-black text-white px-5 py-2 text-sm rounded hover:bg-green-900 transition duration-200 inline-block w-fit"
+    >
+      Email
+    </a>
+  </div>
+</motion.div>
+
+{/* Featured Works Carousel (UNDER Artist Statement + LARGER) */}
+<div className="mt-10 w-full">
+  <h2
+    className="text-3xl font-semibold mb-5 text-center text-black"
+    style={{ fontFamily: "'Barriecito', cursive, system-ui" }}
+  >
+    Folks and Tales - Featured Works
+  </h2>
+
+  <div
+    ref={autoScrollRef}
+    onMouseEnter={() => setIsHovered(true)}
+    onMouseLeave={() => setIsHovered(false)}
+    className="flex overflow-x-auto space-x-6 pb-6 scroll-smooth black-scrollbar"
+  >
+    {artworks.map((art, i) => (
+      <motion.div
+        key={i}
+        whileHover={{ scale: 1.03 }}
+        className="min-w-[380px] bg-white border rounded-2xl shadow-lg p-5 flex-shrink-0"
+      >
+        <img
+          src={art.src}
+          alt={art.title}
+          className="h-[400px] w-full object-cover rounded-xl border border-gray-200 mx-auto"
+        />
+        <p
+          className="text-lg font-medium mt-4 text-black text-center"
+          style={{ fontFamily: "'Barriecito', cursive, system-ui" }}
+        >
+          {art.title}
+        </p>
+      </motion.div>
+    ))}
+  </div>
+</div>
           </div>
 
           {/* Resume Section */}
-          <div className="bg-gradient-to-b from-yellow-100 to-yellow-200 border mt-16 p-8 rounded-2xl shadow-md">
+          <div className="bg-white border mt-16 p-8 rounded-2xl shadow-md hidden">
             <h2
               className="text-3xl font-bold text-black mb-2 text-center"
               style={{ fontFamily: "'Barriecito', cursive, system-ui" }}
@@ -246,7 +249,7 @@ export default function App() {
                     key={i}
                     src={img}
                     alt={`Previous work ${i + 1}`}
-                    className="h-[190px] w-[250px] object-cover rounded-lg border border-gray-300 flex-shrink-0"
+                    className="h-[240px] w-[320px] object-cover rounded-lg border border-gray-300 flex-shrink-0"
                   />
                 ))}
               </div>
