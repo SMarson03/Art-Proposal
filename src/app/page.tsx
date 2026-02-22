@@ -30,39 +30,6 @@ export default function App() {
   const autoScrollRef = useRef<HTMLDivElement | null>(null);
   const prevWorksRef = useRef<HTMLDivElement | null>(null);
 
-  const [isHovered, setIsHovered] = useState(false);
-  const [isPrevHovered, setIsPrevHovered] = useState(false);
-
-  useEffect(() => {
-    if (isHovered) return;
-
-    const interval = setInterval(() => {
-      if (autoScrollRef.current) {
-        autoScrollRef.current.scrollBy({
-          left: 300,
-          behavior: "smooth",
-        });
-      }
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, [isHovered]);
-
-  useEffect(() => {
-    if (isPrevHovered) return;
-
-    const interval = setInterval(() => {
-      if (prevWorksRef.current) {
-        prevWorksRef.current.scrollBy({
-          left: 300,
-          behavior: "smooth",
-        });
-      }
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, [isPrevHovered]);
-
   return (
     <>
       <link
@@ -70,22 +37,22 @@ export default function App() {
         rel="stylesheet"
       />
 
-      <div className="min-h-screen bg-white text-[#111827] flex justify-center items-start py-10 px-4">
+      <div className="min-h-screen bg-white text-[#111827] flex justify-center items-start py-6 sm:py-10 px-4">
         <div className="w-full max-w-6xl">
           {/* Hero Section */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="bg- py-20 px-6 border text-center shadow-md rounded-2xl"
+            className="bg- py-10 sm:py-16 lg:py-20 px-4 sm:px-6 border text-center shadow-md rounded-2xl"
           >
             <h1
-              className="barriecito-regular text-6xl font-bold tracking-tight text-black"
+              className="barriecito-regular text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-black"
               style={{ fontFamily: "'Barriecito', cursive, system-ui" }}
             >
               FOLKS and TALES
             </h1>
-            <p className="text-base mt-4 font-light text-black mb-5 leading-relaxed text-center">
+            <p className="text-sm sm:text-base mt-4 font-light text-black mb-5 leading-relaxed text-center">
               This exhibition reimagines Caribbean folklore working with materials 
               like wood, yarn, plaster, and paper, each piece embodies the tactile, 
               layered nature of oral storytelling. These stories of Anansi, 
@@ -102,20 +69,20 @@ export default function App() {
           </motion.div>
 
           {/* Artist Statement + Featured Works Carousel */}
-          <div className="mt-12 flex flex-col gap-8">
+          <div className="mt-8 sm:mt-12 flex flex-col gap-6 sm:gap-8">
            {/* Artist Statement (FULL WIDTH under Hero) */}
 <motion.div
   whileHover={{ scale: 1.01 }}
-  className="mt-8 bg-white p-8 border rounded-2xl shadow-md w-full transition duration-300"
+  className="mt-6 sm:mt-8 bg-white p-6 sm:p-8 border rounded-2xl shadow-md w-full transition duration-300"
 >
   <h2
-    className="text-2xl font-semibold mb-3 text-black text-center"
+    className="text-xl sm:text-2xl font-semibold mb-3 text-black text-center"
     style={{ fontFamily: "'Barriecito', cursive, system-ui" }}
   >
     ARTIST STATEMENT
   </h2>
 
-  <p className="text-base text-black mb-5 leading-relaxed text-center">
+  <p className="text-sm sm:text-base text-black mb-5 leading-relaxed text-center">
     My work is driven by a need to preserve lost cultural conversations,
     folk wisdom, and spiritual undertones that too often go unrecorded.
     As a Jamaican-born artist living in New York for most of my life,
@@ -126,8 +93,8 @@ export default function App() {
     to explore these themes.
   </p>
 
-  <div className="flex flex-col sm:flex-row sm:items-center gap-3 justify-center">
-    <p className="text-base text-black m-0">Interested in Hosting This Show?</p>
+  <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 justify-center">
+    <p className="text-sm sm:text-base text-black m-0">Interested in Hosting This Show?</p>
     <a
       href="mailto:socsart@gmail.com?subject=Exhibit Inquiry"
       className="bg-black text-white px-5 py-2 text-sm rounded hover:bg-green-900 transition duration-200 inline-block w-fit"
@@ -138,9 +105,9 @@ export default function App() {
 </motion.div>
 
 {/* Featured Works Carousel (UNDER Artist Statement + LARGER) */}
-<div className="mt-10 w-full">
+<div className="mt-8 sm:mt-10 w-full">
   <h2
-    className="text-3xl font-semibold mb-5 text-center text-black"
+    className="text-2xl sm:text-3xl font-semibold mb-5 text-center text-black"
     style={{ fontFamily: "'Barriecito', cursive, system-ui" }}
   >
     Folks and Tales - Featured Works
@@ -148,23 +115,21 @@ export default function App() {
 
   <div
     ref={autoScrollRef}
-    onMouseEnter={() => setIsHovered(true)}
-    onMouseLeave={() => setIsHovered(false)}
     className="flex overflow-x-auto space-x-6 pb-6 scroll-smooth black-scrollbar"
   >
     {artworks.map((art, i) => (
       <motion.div
         key={i}
         whileHover={{ scale: 1.03 }}
-        className="min-w-[380px] bg-white border rounded-2xl shadow-lg p-5 flex-shrink-0"
+        className="min-w-[280px] sm:min-w-[340px] lg:min-w-[380px] bg-white border rounded-2xl shadow-lg p-4 sm:p-5 flex-shrink-0"
       >
         <img
           src={art.src}
           alt={art.title}
-          className="h-[400px] w-full object-cover rounded-xl border border-gray-200 mx-auto"
+          className="h-[250px] sm:h-[320px] lg:h-[400px] w-full object-cover rounded-xl border border-gray-200 mx-auto"
         />
         <p
-          className="text-lg font-medium mt-4 text-black text-center"
+          className="text-base sm:text-lg font-medium mt-3 sm:mt-4 text-black text-center"
           style={{ fontFamily: "'Barriecito', cursive, system-ui" }}
         >
           {art.title}
@@ -240,8 +205,6 @@ export default function App() {
               </h3>
               <div
                 ref={prevWorksRef}
-                onMouseEnter={() => setIsPrevHovered(true)}
-                onMouseLeave={() => setIsPrevHovered(false)}
                 className="overflow-x-auto black-scrollbar flex space-x-4 pb-4 scroll-smooth"
               >
                 {carouselImages.map((img, i) => (
