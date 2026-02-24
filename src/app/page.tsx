@@ -121,7 +121,7 @@ export default function App() {
       <motion.div
         key={i}
         whileHover={{ scale: 1.03 }}
-        className="min-w-[150px] sm:min-w-[280px] lg:min-w-[380px] bg-white border rounded-2xl shadow-lg p-2 sm:p-4 sm:p-5 flex-shrink-0"
+        className="min-w-[165px] sm:min-w-[280px] lg:min-w-[380px] bg-white border rounded-2xl shadow-lg p-3 sm:p-4 sm:p-5 flex-shrink-0"
       >
         <img
           src={art.src}
