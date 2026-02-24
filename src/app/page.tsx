@@ -126,7 +126,7 @@ export default function App() {
         <img
           src={art.src}
           alt={art.title}
-          className="h-[110px] sm:h-[250px] lg:h-[400px] w-full object-cover rounded-xl border border-gray-200 mx-auto"
+          className="h-[110px] sm:h-[250px] lg:h-[400px] w-full object-contain rounded-xl border border-gray-200 mx-auto"
         />
         <p
           className="text-base sm:text-lg font-medium mt-3 sm:mt-4 text-black text-center"
